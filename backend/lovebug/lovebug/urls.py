@@ -8,4 +8,5 @@ urlpatterns = [
     path("api/me/", login_views.me, name="me"),
     path("api/logout/", login_views.api_logout, name="api_logout"),
     path("", login_views.index, name="index"),
+    path("", include("login.urls")) 
 ]
