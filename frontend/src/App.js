@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import LovebugLogin from './components/LovebugLogin';
 import LovebugDashboard from './components/LovebugDashboard';
 import LovebugScoreboard from './components/LovebugScoreboard';
+
+const API_BASE = process.env.REACT_APP_API_BASE;
 
 function App() {
   const [user, setUser] = useState(null);
@@ -14,10 +17,12 @@ function App() {
 
   const checkAuth = async () => {
     try {
-      const username = localStorage.getItem('ctf_username');
+      const response = await axios.get(`${API_BASE}/api/me/`, {
+        withCredentials: true
+      });
       
-      if (username) {
-        setUser({ authenticated: true, username });
+      if (response.data.authenticated) {
+        setUser(response.data);
       }
     } catch (error) {
       console.error('Auth check failed:', error);
@@ -32,7 +37,9 @@ function App() {
 
   const handleLogout = async () => {
     try {
-      localStorage.removeItem('ctf_username');
+      await axios.post(`${API_BASE}/api/logout/`, {}, {
+        withCredentials: true
+      });
       setUser(null);
       setCurrentView('dashboard');
     } catch (error) {
@@ -65,7 +72,6 @@ function App() {
   if (!user) {
     return <LovebugLogin onLoginSuccess={handleLoginSuccess} />;
   }
-
 
   if (currentView === 'scoreboard') {
     return (

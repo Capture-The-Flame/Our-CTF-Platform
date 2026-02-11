@@ -35,7 +35,7 @@ class Challenge(models.Model):
     hint_2 = models.TextField(blank=True, null=True)
     hint_3 = models.TextField(blank=True, null=True)
 
-    artifact_path = models.CharField(max_length=300, blank=True, null=True)
+    artifact_path = models.CharField(max_length=300, blank=True, null=True)  # KEEP THIS!
 
     @property
     def current_points(self) -> int:
@@ -46,13 +46,13 @@ class Challenge(models.Model):
 
 
 class UserChallenge(models.Model):
-    username = models.CharField(max_length=200)  
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='completed_challenges')
     challenge = models.ForeignKey(Challenge, on_delete=models.CASCADE)
     completed_at = models.DateTimeField(auto_now_add=True)
     awarded_points = models.IntegerField(default=0)
 
     class Meta:
-        unique_together = ('username', 'challenge')
+        unique_together = ('user', 'challenge')  # Changed back to 'user'
 
     def __str__(self):
-        return f"{self.username} - {self.challenge.title}"
+        return f"{self.user.username} - {self.challenge.title}"

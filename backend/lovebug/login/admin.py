@@ -3,15 +3,10 @@ from .models import Challenge, UserChallenge
 
 @admin.register(Challenge)
 class ChallengeAdmin(admin.ModelAdmin):
-    list_display = [
-        'title', 'category',
-        'base_points', 'solves_count', 'current_points_display',
-        'is_active', 'created_at'
-    ]
-    list_filter = ['category', 'is_active']
-    search_fields = ['title', 'description']
-    ordering = ['-created_at'] 
-
+    list_display = ('title', 'category', 'base_points', 'current_points', 'solves_count', 'is_active')
+    list_filter = ('category', 'is_active')
+    search_fields = ('title', 'description')
+    
     fieldsets = (
         ('Basic Information', {
             'fields': ('title', 'category')
@@ -26,20 +21,21 @@ class ChallengeAdmin(admin.ModelAdmin):
             'fields': ('hint_1', 'hint_2', 'hint_3'),
             'classes': ('collapse',)
         }),
-        ('Settings', {
+        ('Status', {
             'fields': ('is_active',)
         }),
     )
-
-    @admin.display(description="Points (current)")
-    def current_points_display(self, obj):
-        return obj.current_points
-
+    
+    readonly_fields = ('solves_count',)
 
 @admin.register(UserChallenge)
 class UserChallengeAdmin(admin.ModelAdmin):
-    list_display = ['username', 'challenge', 'awarded_points', 'completed_at']  
-    list_filter = ['completed_at', 'challenge__category']
-    search_fields = ['username', 'challenge__title']  
-    ordering = ['-completed_at']
-    readonly_fields = ['completed_at']
+    list_display = ('get_username', 'challenge', 'completed_at', 'awarded_points') 
+    list_filter = ('completed_at',)
+    search_fields = ('user__username', 'user__email', 'challenge__title') 
+    readonly_fields = ('completed_at', 'awarded_points')
+    
+    def get_username(self, obj):
+        return obj.user.username
+    get_username.short_description = 'Username'
+    get_username.admin_order_field = 'user__username'

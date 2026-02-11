@@ -6,11 +6,22 @@ import './LovebugDashboard.css';
 
 const API_BASE = process.env.REACT_APP_API_BASE;
 
-const POLL_MS = 7000;
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
 
-const getUsername = () => {
-  return localStorage.getItem('ctf_username');
-};
+const POLL_MS = 7000;
 
 const LovebugDashboard = ({ user, onLogout, onNavigate }) => {
   const [challenges, setChallenges] = useState([]);
@@ -44,11 +55,8 @@ const LovebugDashboard = ({ user, onLogout, onNavigate }) => {
 
   const loadChallenges = async () => {
     try {
-      const username = getUsername();
       const response = await axios.get(`${API_BASE}/api/challenges/`, {
-        headers: {
-          'X-Username': username
-        }
+        withCredentials: true
       });
       setChallenges(response.data);
       setError(null); 
@@ -70,15 +78,16 @@ const LovebugDashboard = ({ user, onLogout, onNavigate }) => {
   };
 
   const handleSubmitFlag = async (challengeId, flag) => {
-    const username = getUsername();
+    const csrftoken = getCookie('csrftoken');
     
     try {
       const response = await axios.post(
         `${API_BASE}/api/challenges/${challengeId}/submit/`,
         { flag },
         { 
+          withCredentials: true,
           headers: {
-            'X-Username': username,
+            'X-CSRFToken': csrftoken,
             'Content-Type': 'application/json',
           }
         }
@@ -185,7 +194,7 @@ const LovebugDashboard = ({ user, onLogout, onNavigate }) => {
 
       <main className="dashboard-content">
         <div className="user-info">
-          <p>Welcome, {user.username}!</p>
+          <p>Welcome, {user.email}!</p>
         </div>
 
         {error && (

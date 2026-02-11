@@ -4,54 +4,60 @@ import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-4th6rp-o3y-&9$sb&j$nrf$$vfi!o($sj(8=lof0@6g)tk-w9*')
+# --------------------
+# Core
+# --------------------
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-only-insecure-key")
+DEBUG = os.environ.get("DEBUG", "True").lower() == "true"
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+ALLOWED_HOSTS = [
+    h.strip()
+    for h in os.environ.get("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
+    if h.strip()
+]
 
-ALLOWED_HOSTS = [h.strip() for h in os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')]
+# Only meaningful behind Railway/Reverse proxy
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
-
-# Application definition
+# --------------------
+# Apps
+# --------------------
 SITE_ID = int(os.environ.get("SITE_ID", "1"))
 
 INSTALLED_APPS = [
-    "rest_framework",
     "corsheaders",
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    "login",
+    "rest_framework",
+
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
     "django.contrib.sites",
+
+    "login",
+
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
 ]
 
-SOCIALACCOUNT_PROVIDERS = {
-    "google": {
-        "SCOPE": [
-            "profile",
-            "email",
-        ],
-        "AUTH_PARAMS": {"access_type": "online"},
-    }
-}
-
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",  # Add this for static files
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+
     "corsheaders.middleware.CorsMiddleware",
+
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+
     "allauth.account.middleware.AccountMiddleware",
+
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -60,147 +66,146 @@ ROOT_URLCONF = "lovebug.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.request",  # required for allauth
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'lovebug.wsgi.application'
+WSGI_APPLICATION = "lovebug.wsgi.application"
 
+# --------------------
 # Database
-# Use PostgreSQL in production, SQLite in development
-if os.environ.get('DATABASE_URL'):
+# --------------------
+USE_SQLITE = os.environ.get("USE_SQLITE", "False").lower() == "true"
+
+if USE_SQLITE or (DEBUG and not os.environ.get("DATABASE_URL")):
     DATABASES = {
-        'default': dj_database_url.config(
-            default=os.environ.get('DATABASE_URL'),
-            conn_max_age=600,
-            conn_health_checks=True,
-        )
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
 else:
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
+        "default": dj_database_url.config(
+            default=os.environ.get("DATABASE_URL"),
+            conn_max_age=600,
+            conn_health_checks=True,
+            ssl_require=True,
+        )
     }
 
-# Password validation
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
-# Internationalization
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
-USE_I18N = True
-USE_TZ = True
-
-# Static files (CSS, JavaScript, Images)
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# Default primary key field type
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+# --------------------
+# Auth / allauth
+# --------------------
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
-# Allauth settings
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'optional'
+# New allauth settings (no deprecation warnings)
+ACCOUNT_LOGIN_METHODS = {"email"}
+ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", "password2*"]
+ACCOUNT_EMAIL_VERIFICATION = "optional"
+
 SOCIALACCOUNT_LOGIN_ON_GET = True
-SOCIALACCOUNT_ADAPTER = "login.adapters.SocialAccountAdapter"  # ADD THIS BACK
-SOCIALACCOUNT_AUTO_SIGNUP = True  # ADD THIS BACK
+SOCIALACCOUNT_AUTO_SIGNUP = True
+SOCIALACCOUNT_ADAPTER = "login.adapters.SocialAccountAdapter"
 
-# Get frontend URL from environment
-FRONTEND_URL = os.environ.get('FRONTEND_URL', 'http://localhost:3000')
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "SCOPE": ["profile", "email"],
+        "AUTH_PARAMS": {"access_type": "online"},
+    }
+}
 
-# Redirect URLs
-LOGIN_REDIRECT_URL = f"{FRONTEND_URL}/" 
+# --------------------
+# Frontend / redirects
+# --------------------
+FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:3000").rstrip("/")
+LOGIN_REDIRECT_URL = f"{FRONTEND_URL}/"
 LOGOUT_REDIRECT_URL = f"{FRONTEND_URL}/"
 ACCOUNT_LOGOUT_REDIRECT_URL = f"{FRONTEND_URL}/"
 
-# CORS settings
-CORS_ALLOWED_ORIGINS = [o.strip() for o in os.environ.get(
-    'CORS_ALLOWED_ORIGINS',
-    'https://lovebug-ctf.vercel.app'
-).split(',') if o.strip()]
-CORS_ALLOW_CREDENTIALS = True
+ACCOUNT_DEFAULT_HTTP_PROTOCOL = "http" if DEBUG else "https"
 
-# CSRF settings
-CSRF_TRUSTED_ORIGINS = [o.strip() for o in os.environ.get(
-    'CSRF_TRUSTED_ORIGINS',
-    'https://lovebug-ctf.vercel.app'
-).split(',') if o.strip()]
+# --------------------
+# CORS / CSRF
+# --------------------
+DEFAULT_CORS = "http://localhost:3000"
+DEFAULT_CSRF = "http://localhost:3000"
 
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-    'x-username',  # Add our custom header
+CORS_ALLOWED_ORIGINS = [
+    o.strip()
+    for o in os.environ.get("CORS_ALLOWED_ORIGINS", DEFAULT_CORS).split(",")
+    if o.strip()
+]
+CSRF_TRUSTED_ORIGINS = [
+    o.strip()
+    for o in os.environ.get("CSRF_TRUSTED_ORIGINS", DEFAULT_CSRF).split(",")
+    if o.strip()
 ]
 
-# Session and Cookie settings
+CORS_ALLOW_CREDENTIALS = True
+
+# --------------------
+# Cookies (local vs prod)
+# --------------------
 SESSION_COOKIE_HTTPONLY = True
-SESSION_COOKIE_SECURE = True  # Always True in production
-SESSION_COOKIE_SAMESITE = "None"  # CRITICAL: Must be None for cross-origin
-SESSION_COOKIE_DOMAIN = None  # Let Django handle it
-
 CSRF_COOKIE_HTTPONLY = False
-CSRF_COOKIE_SECURE = True  # Always True in production
-CSRF_COOKIE_SAMESITE = "None"  # CRITICAL: Must be None for cross-origin
 
-# Security settings for production
-if not DEBUG:
-    SECURE_SSL_REDIRECT = True
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SECURE_HSTS_SECONDS = 31536000
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
+if DEBUG:
+    # local dev over http
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+    SESSION_COOKIE_SAMESITE = "Lax"
+    CSRF_COOKIE_SAMESITE = "Lax"
+else:
+    # prod cross-origin (Vercel -> Railway)
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SAMESITE = "None"
+    CSRF_COOKIE_SAMESITE = "None"
 
-# REST Framework settings
+SESSION_COOKIE_DOMAIN = None
+
+# --------------------
+# Static / Media
+# --------------------
+STATIC_URL = "/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# --------------------
+# REST
+# --------------------
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
     ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',  
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny",
     ],
 }
 
-
-ACCOUNT_DEFAULT_HTTP_PROTOCOL = 'https'
-
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# --------------------
+# Prod-only security
+# --------------------
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True

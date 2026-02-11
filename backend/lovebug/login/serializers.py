@@ -5,23 +5,23 @@ from .models import Challenge, UserChallenge
 class ChallengeSerializer(serializers.ModelSerializer):
     completed = serializers.SerializerMethodField()
     points = serializers.SerializerMethodField()
-    artifact_url = serializers.SerializerMethodField()
+    artifact_url = serializers.SerializerMethodField()  # KEEP THIS!
 
     class Meta:
         model = Challenge
         fields = [
-            "id",
-            "title",
-            "description",
-            "prompt",
-            "category",
-            "points",
-            "is_active",
-            "completed",
-            "hint_1",
-            "hint_2",
-            "hint_3",
-            "artifact_url",
+            'id',
+            'title',
+            'description',
+            'prompt',
+            'category',
+            'points',
+            'is_active',
+            'completed',
+            'hint_1',
+            'hint_2',
+            'hint_3',
+            'artifact_url',  
         ]
 
     def get_points(self, obj):
@@ -30,27 +30,21 @@ class ChallengeSerializer(serializers.ModelSerializer):
     def get_artifact_url(self, obj):
         if not obj.artifact_path:
             return None
-
+        
+        # If it's already a full URL (Google Drive), return as-is
         if obj.artifact_path.startswith('http'):
             return obj.artifact_path
-
+        
+        # Otherwise, build the media URL
         request = self.context.get("request")
         if request:
             return request.build_absolute_uri(f"{settings.MEDIA_URL}{obj.artifact_path}")
         return f"{settings.MEDIA_URL}{obj.artifact_path}"
 
     def get_completed(self, obj):
-        request = self.context.get("request")
-        username = self.context.get("username")
-
-        if username:
-            return UserChallenge.objects.filter(username=username, challenge=obj).exists()
-
-        if request and hasattr(request, "session"):
-            session_username = request.session.get("username")
-            if session_username:
-                return UserChallenge.objects.filter(username=session_username, challenge=obj).exists()
-
+        request = self.context.get('request')
+        if request and request.user.is_authenticated:
+            return UserChallenge.objects.filter(user=request.user, challenge=obj).exists()
         return False
 
 class UserChallengeSerializer(serializers.ModelSerializer):
@@ -59,4 +53,3 @@ class UserChallengeSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserChallenge
         fields = ['challenge_title', 'completed_at', 'awarded_points']
-
