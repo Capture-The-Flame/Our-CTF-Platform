@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import LovebugLogin from './components/LovebugLogin';
-import LovebugDashboard from './components/LovebugDashboard';
-import LovebugScoreboard from './components/LovebugScoreboard';
+import CTFLogin from './components/CTFLogin';
+import CTFDashboard from './components/CTFDashboard';
+import CTFScoreboard from './components/CTFScoreboard';
 
 // const API_BASE = process.env.REACT_APP_API_BASE;
 
@@ -61,7 +61,7 @@ function App() {
         height: '100vh',
         fontFamily: 'monospace',
         background: 'linear-gradient(135deg, #ffeef8 0%, #ffe0f0 100%)',
-        color: '#d946a6',
+        color: '#f4f4f4',
         fontSize: '18px'
       }}>
         Loading...
@@ -70,12 +70,12 @@ function App() {
   }
 
   if (!user) {
-    return <LovebugLogin onLoginSuccess={handleLoginSuccess} />;
+    return <CTFLogin onLoginSuccess={handleLoginSuccess} />;
   }
 
   if (currentView === 'scoreboard') {
     return (
-      <LovebugScoreboard 
+      <CTFScoreboard 
         user={user}
         onBack={() => handleNavigate('dashboard')}
       />
@@ -83,7 +83,7 @@ function App() {
   }
 
   return (
-    <LovebugDashboard 
+    <CTFDashboard 
       user={user}
       onLogout={handleLogout}
       onNavigate={handleNavigate}

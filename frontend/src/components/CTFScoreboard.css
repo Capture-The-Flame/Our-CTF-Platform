@@ -1,0 +1,87 @@
+.ctf-scoreboard {
+  min-height: 100vh;
+  background: #ffffff;
+  font-family: 'Courier New', monospace;
+}
+
+/* header */
+.logo h1 {
+  font-size: 28px;
+  color: #000;
+}
+
+.nav-button {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* titles */
+.page-title {
+  font-size: 48px;
+  color: #000;
+}
+
+.subtitle {
+  font-size: 20px;
+  color: #444;
+}
+
+/* table container */
+.scoreboard-table-container {
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 15px;
+  padding: 20px;
+}
+
+/* header */
+.scoreboard-table thead {
+  background: #000;
+  color: #fff;
+}
+
+/* rows */
+.scoreboard-table tbody tr {
+  border-bottom: 1px solid #ddd;
+}
+
+.scoreboard-table tbody tr.top-three {
+  background: rgba(0,0,0,0.04);
+}
+
+.scoreboard-table tbody tr.current-user {
+  border: 2px solid #000;
+  background: rgba(0,0,0,0.06);
+}
+
+.rank-number,
+.username-cell,
+.challenges-cell {
+  color: #000;
+}
+
+.points-value {
+  background: #000;
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+/* stats */
+.your-stats {
+  border: 2px solid #000;
+  border-radius: 15px;
+  padding: 30px;
+}
+
+.stat-card {
+  background: #000;
+  color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+}

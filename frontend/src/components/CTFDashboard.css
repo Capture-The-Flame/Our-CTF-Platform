@@ -8,10 +8,8 @@ body, html {
   overflow-x: hidden;
 }
 
-
-.lovebug-login {
+.ctf-login {
   font-family: 'Space Mono', monospace;
-  /* background-image: url("../assets/lovebug-bg.png"); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -181,7 +179,7 @@ body, html {
 }
 
 /* ========== DASHBOARD STYLES ========== */
-.lovebug-dashboard {
+.ctf-dashboard {
   font-family: 'Space Mono', monospace;
   background: #fdf5f5;
   min-height: 100vh;
@@ -446,7 +444,7 @@ body, html {
 }
 
 @media (max-width: 480px) {
-  .lovebug-login {
+  .ctf-login {
     padding: 20px;
   }
 
