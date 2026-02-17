@@ -11,20 +11,20 @@ const CTFLogin = () => {
   };
 
   const LoginLogo = () => {
-    // const logo = CTF_Logo;
-    const logo = ['LOGO GOES HERE'];
+    const logo = CTF_Logo;
+    // const logo = ['LOGO GOES HERE'];
 
     return (
-      <div className="ctf-ascii">
-        {logo.map((line, index) => (
-          <div key={index} className="ctf-line">
-            {line}
-          </div>
-        ))}
-      </div>
-      // <div>
-      //   // <img src={logo} alt="Our Logo : )" classname="ctf-image"/>
-      // // </div>
+      // <div className="ctf-ascii">
+      //   {logo.map((line, index) => (
+      //     <div key={index} className="ctf-line">
+      //       {line}
+      //     </div>
+      //   ))}
+      // </div>
+      <div>
+        // <img src={logo} alt="Our Logo : )" classname="ctf-image"/>
+      // </div>
     );
   };
 
