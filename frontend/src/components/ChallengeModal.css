@@ -23,7 +23,7 @@
 
 .modal-content {
   background: #1a1a1a;
-  border: 2px solid #ff69b4;
+  border: 2px solid #ff8c00;
   border-radius: 12px;
   max-width: 600px;
   width: 90%;
@@ -51,7 +51,7 @@
   right: 15px;
   background: transparent;
   border: none;
-  color: #ff69b4;
+  color: #ff8c00;
   font-size: 32px;
   cursor: pointer;
   width: 40px;
@@ -75,7 +75,7 @@
 }
 
 .modal-header h2 {
-  color: #ff69b4;
+  color: #ff8c00;
   margin: 0;
   font-size: 28px;
   padding-right: 40px; /* Space for close button */
@@ -90,7 +90,7 @@
 }
 
 .challenge-prompt h3 {
-  color: #ff69b4;
+  color: #ff8c00;
   font-size: 18px;
   margin-bottom: 10px;
   font-weight: 600;
@@ -123,7 +123,7 @@
 .hint-toggle {
   background: transparent;
   border: 1px solid rgba(255, 105, 180, 0.3);
-  color: #ff69b4;
+  color: #ff8c00;
   padding: 10px 15px;
   border-radius: 6px;
   cursor: pointer;
@@ -136,14 +136,14 @@
 
 .hint-toggle:hover {
   background: rgba(255, 105, 180, 0.1);
-  border-color: #ff69b4;
+  border-color: #ff8c00;
 }
 
 .hint-content {
   margin-top: 8px;
   padding: 12px;
   background: rgba(255, 105, 180, 0.08);
-  border-left: 3px solid #ff69b4;
+  border-left: 3px solid #ff8c00;
   border-radius: 4px;
   color: #e0e0e0;
   font-size: 14px;
@@ -182,7 +182,7 @@
 
 .flag-input:focus {
   outline: none;
-  border-color: #ff69b4;
+  border-color: #ff8c00;
   background: rgba(255, 255, 255, 0.08);
   box-shadow: 0 0 15px rgba(255, 105, 180, 0.2);
 }
@@ -192,7 +192,7 @@
 }
 
 .submit-button {
-  background: linear-gradient(135deg, #ff1493, #ff69b4);
+  background: linear-gradient(135deg, #ff1493, #ff8c00);
   color: white;
   border: none;
   padding: 14px 32px;
