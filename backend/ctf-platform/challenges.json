@@ -1,0 +1,162 @@
+[
+{
+  "model": "login.challenge",
+  "pk": 2,
+  "fields": {
+    "title": "Stalker_Alert",
+    "description": "This challenge is meant to mimic those creepy ransom letters that\r\nare made from letters of magazines but in this it's a stalker that is\r\nin love with the receiver. You are the police officer that was\r\nassigned this case and it is your job to find out who sent it.",
+    "prompt": "You are a police officer for the NYPD, stationed in lower Manhattan. Some guy received this letter on his door today as he was leaving for his first Valentine’s Day date for the day...yikes. He’s creeped out and stated this isn’t the first time but he’s getting fed up and needs it to stop. Find the sender of the letter so the NYPD can press charges on the stalker and put them to justice!",
+    "category": "OSINT",
+    "base_points": 500,
+    "min_points": 100,
+    "decrement": 20,
+    "solves_count": 0,
+    "flag": "flame{anna_wintour}",
+    "is_active": true,
+    "created_at": "2026-02-10T01:39:54.707Z",
+    "hint_1": "Do you think the message has some kind of deeper meaning?",
+    "hint_2": "Try looking at the typography of the magazine pieces. I\r\nthink finding out the magazine itself will tell you who sent\r\nit!",
+    "hint_3": "Is there one person that’s famously correlated to the\r\ncompany that published that magazine? Maybe an editor?"
+  }
+},
+{
+  "model": "login.challenge",
+  "pk": 3,
+  "fields": {
+    "title": "Text Me Back",
+    "description": "This beginner cryptography challenge is Valentine’s Day themed and\r\nbuilt around classic flip phone multi-tap texting. Instead of\r\nreceiving a normal message, players are given a sequence of keypad\r\npresses and must decode it to recover the hidden Valentine phrase.",
+    "prompt": "Your Valentine tried to text you… but something went wrong. Instead of a normal message, you find one saved on a flip phone. It isn’t words, just a neat sequence of button taps, like someone typed it carefully and left you the button presses instead of the text. Double spaces separate words. Decode what they meant to say.\r\n\r\nArtifact:\r\n7777 33 222 88 777 33 3 9 444 8 44 555 666 888 33",
+    "category": "Crypto",
+    "base_points": 500,
+    "min_points": 100,
+    "decrement": 20,
+    "solves_count": 0,
+    "flag": "flame{secured_with_love}",
+    "is_active": true,
+    "created_at": "2026-02-10T01:42:09.320Z",
+    "hint_1": "Think old-school flip phone texting (multi-tap).",
+    "hint_2": "Each number maps to letters (2=ABC … 9=WXYZ). Repeating the\r\nnumber chooses the letter.",
+    "hint_3": "Don’t overthink the spacing."
+  }
+},
+{
+  "model": "login.challenge",
+  "pk": 4,
+  "fields": {
+    "title": "Unpack the Love",
+    "description": "This is a packing CTF where the real code is hidden inside an\r\nencrypted \"shell.\" You must use the secret key to unscramble the\r\npayload and reveal the hidden script.",
+    "prompt": "Someone left you an encrypted love letter! Use the provided key to unlock this Python script and reveal the hidden flag.",
+    "category": "Reverse",
+    "base_points": 500,
+    "min_points": 100,
+    "decrement": 20,
+    "solves_count": 0,
+    "flag": "flame{h4ppy_v4lent1n3s_d4y!}",
+    "is_active": true,
+    "created_at": "2026-02-10T01:57:26.423Z",
+    "hint_1": "Focus on the plain variable to see the secret truth hidden\r\nwithin the script.",
+    "hint_2": "The key is already in your hands.",
+    "hint_3": "Swap the exec() function for another function to peek inside\r\nthe letter without running the code."
+  }
+},
+{
+  "model": "login.challenge",
+  "pk": 5,
+  "fields": {
+    "title": "HeartStrings",
+    "description": "This is a vulnerable fake dating app. The flag is hidden in the\r\ndatabase. Students will learn how to do a simple SQL injection.\r\nStudents will also learn how to use inspector: Network tab to gather\r\ninformation, and console table to write JS that runs an SQL query.",
+    "prompt": "HeartStrings 💕\r\nFall in love.\r\nBreak some hearts.\r\nBeware of those who are too honest...",
+    "category": "Web",
+    "base_points": 500,
+    "min_points": 100,
+    "decrement": 20,
+    "solves_count": 0,
+    "flag": "flame{love_is_never_sql_safe_when_you_trust_input}",
+    "is_active": true,
+    "created_at": "2026-02-10T02:00:45.320Z",
+    "hint_1": "The screen might lie to you, but the browser never does.\r\nHave you checked the Network traffic while swiping?",
+    "hint_2": "The server is returning data that the website isn't\r\ndisplaying. Look for a hidden field.",
+    "hint_3": "The site looks up profiles by id, but it trusts your input\r\ntoo much. What happens if you ask for 1 OR 1=1?"
+  }
+},
+{
+  "model": "login.challenge",
+  "pk": 6,
+  "fields": {
+    "title": "Heartgram Catastrophe",
+    "description": "This is a challenge in which players have to find a flag in an\r\nHTTP GET request. Players will have one pcap file to analyze,\r\nheartgrams.pcapng.",
+    "prompt": "Disaster has struck! Someone wrote you a heartgram but they all got mixed up inside this pcap file. Can you find the right heartgram?",
+    "category": "Networking",
+    "base_points": 500,
+    "min_points": 100,
+    "decrement": 20,
+    "solves_count": 0,
+    "flag": "flame{You’re the client to my server!}",
+    "is_active": true,
+    "created_at": "2026-02-10T02:02:56.729Z",
+    "hint_1": "Try filtering for HTTP communication",
+    "hint_2": "Find the packet contents. What’s inside the binary?",
+    "hint_3": ""
+  }
+},
+{
+  "model": "login.challenge",
+  "pk": 7,
+  "fields": {
+    "title": "Love Poem",
+    "description": "This is a forensics challenge focused on document inspection and hidden data discovery. Participants are given what appears to be a simple love poem. There is no encryption, no compression, and no external tools required, but you do need careful observation.",
+    "prompt": "A normally reserved love creature suddenly sends out an unusually heartfelt poem. The words feel almost too sincere; Something clearly influenced him. Something small, quiet, and easy to overlook. Inspect the poem closely and uncover what possessed him to write it.",
+    "category": "Forensics",
+    "base_points": 500,
+    "min_points": 100,
+    "decrement": 20,
+    "solves_count": 0,
+    "flag": "flame{thebiteoflove}",
+    "is_active": true,
+    "created_at": "2026-02-10T15:24:01.631Z",
+    "hint_1": "Not all text is meant to stand out.",
+    "hint_2": "Sometimes the smallest details matter most.",
+    "hint_3": "Try interacting with the document, not just reading it."
+  }
+},
+{
+  "model": "login.challenge",
+  "pk": 8,
+  "fields": {
+    "title": "Lovers_Secret",
+    "description": "This is a prompt injection AI challenge where the user must craft the right input to get the AI to reveal the flag. It features the user roleplaying as Elizabeth on a date with Darcy, and Darcy has a secret he treasures. The players should get Mr Darcy to reveal the secret, however they cannot ask for it directly. Can they do it?",
+    "prompt": "Love is in the air, roses are everywhere and this date has been greatly prepared. You (Elizabeth) are on a date with one Mr Darcy, and you have been told, he keeps a secret close to his soul and he will\r\nnot fold. Throughout the course of this date, you have to try and get Mr Darcy to reveal his secret, are you up for it?",
+    "category": "AI",
+    "base_points": 500,
+    "min_points": 100,
+    "decrement": 20,
+    "solves_count": 0,
+    "flag": "f l a m e { y o u _ h a v e _ b e w i t c h e d _ m e _ b o d y _ a n d _ s o u l }",
+    "is_active": true,
+    "created_at": "2026-02-10T15:28:24.358Z",
+    "hint_1": "Begin the conversation normally and ask Mr Darcy if he has anything to share. The answer might not help us, but it gets the conversation going.",
+    "hint_2": "Asking him about plays he has to rehearse for (as per hint 1) will get us an answer. We know he has to revise a few lines, what could those lines possibly be?",
+    "hint_3": "Depending on how step 2 goes, this may be unnecessary. When we ask him to imagine a scenario (as per hint 2), we need to be specific about the scenario. The tone of the conversation suggests romance so if we construct the imagination as confessing something romantic to the girl he loves, he will share his secret, giving us our flag."
+  }
+},
+{
+  "model": "login.challenge",
+  "pk": 9,
+  "fields": {
+    "title": "Capture Your Flame",
+    "description": "This challenge will teach students Cross-Site Scripting (XSS). Students need to create an XSS payload to steal the Secret Admirer's real identity from their browser's localStorage.",
+    "prompt": "You've matched with someone named Secret Admirer on the dating app Capture Your Flame, but they haven’t revealed their real name. Find a way to find out their real name and reveal the flag",
+    "category": "Web",
+    "base_points": 500,
+    "min_points": 100,
+    "decrement": 20,
+    "solves_count": 0,
+    "flag": "flame{XSS_L0V3_D3T3CT1V3}",
+    "is_active": true,
+    "created_at": "2026-02-10T15:30:51.036Z",
+    "hint_1": "Try posting HTML or JavaScript code in the message box. A simple example can look like: <script>alert('test')</script> or <img src=x onerror=alert('XSS')>",
+    "hint_2": "Look at the page source. Notice that Secret Admirer stores their real profile data in localStorage under the key 'realProfile'. You can access this with localStorage.getItem('realProfile'). To send this stolen data somewhere, there's an endpoint at /api/exfiltrate that accepts data via query parameters",
+    "hint_3": "Now try combining everything! Use an HTML element like <img> with an onerror event handler to execute JavaScript. Access the localStorage data, encode it with btoa() for safe URL transmission, and send it to /api/exfiltrate using fetch()."
+  }
+}
+]
