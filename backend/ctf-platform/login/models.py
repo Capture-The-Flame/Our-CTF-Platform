@@ -35,7 +35,7 @@ class Challenge(models.Model):
     hint_2 = models.TextField(blank=True, null=True)
     hint_3 = models.TextField(blank=True, null=True)
 
-    artifact_path = models.CharField(max_length=300, blank=True, null=True)  # KEEP THIS!
+    artifact_path = models.CharField(max_length=300, blank=True, null=True)  
 
     @property
     def current_points(self) -> int:

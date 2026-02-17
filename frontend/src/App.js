@@ -4,7 +4,10 @@ import CTFLogin from './components/CTFLogin';
 import CTFDashboard from './components/CTFDashboard';
 import CTFScoreboard from './components/CTFScoreboard';
 
-// const API_BASE = process.env.REACT_APP_API_BASE;
+const API_BASE = process.env.REACT_APP_API_BASE;
+
+axios.defaults.baseURL = process.env.REACT_APP_API_BASE || "http://localhost:8000";
+axios.defaults.withCredentials = true;
 
 function App() {
   const [user, setUser] = useState(null);

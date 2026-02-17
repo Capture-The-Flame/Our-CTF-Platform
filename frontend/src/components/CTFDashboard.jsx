@@ -4,7 +4,7 @@ import ChallengeModal from './ChallengeModal';
 import Notification from './Notification';
 import './CTFDashboard.css';
 
-// const API_BASE = process.env.REACT_APP_API_BASE;
+const API_BASE = process.env.REACT_APP_API_BASE;
 
 function getCookie(name) {
   let cookieValue = null;
