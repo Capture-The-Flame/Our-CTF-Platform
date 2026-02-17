@@ -1,6 +1,8 @@
 import React from 'react';
 import './CTFLogin.css';
 
+import CTF_Logo from "../assets/CTF_Logo.png";
+
 const API_BASE = process.env.REACT_APP_API_BASE;
 
 const CTFLogin = () => {
@@ -9,7 +11,8 @@ const CTFLogin = () => {
   };
 
   const LoginLogo = () => {
-    const logo = ['Insert Logo or something fun here'];
+    // const logo = CTF_Logo;
+    const logo = ['LOGO GOES HERE'];
 
     return (
       <div className="ctf-ascii">
@@ -19,6 +22,9 @@ const CTFLogin = () => {
           </div>
         ))}
       </div>
+      // <div>
+      //   // <img src={logo} alt="Our Logo : )" classname="ctf-image"/>
+      // // </div>
     );
   };
 
@@ -28,7 +34,7 @@ const CTFLogin = () => {
         <LoginLogo />
 
         <div className="menu-section">
-          <h1 className="title">CTF Platform</h1>
+          <h1 className="title">Ignite the Flame</h1>
 
           <button className="google-btn" onClick={handleGoogleLogin}>
             <img

@@ -19,7 +19,7 @@ html, body {
 
 /* Page */
 .ctf-login {
-  background-color: #ffffff;
+  background-color: #292828;
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -49,9 +49,12 @@ html, body {
   min-width: 0;
 }
 
-.ctf-login .ctf-ascii {
+.ctf-login .ctf-ascii{
   flex: 0 1 480px;
 }
+/* .ctf-login .ctf-logo{
+  flex: 0 1 480px;
+} */
 
 .ctf-login .menu-section {
   flex: 0 1 520px;
@@ -85,6 +88,17 @@ html, body {
 .ctf-line {
   opacity: 0.95;
 }
+
+/* PNG Logo */
+.ctf-logo{
+  width:25%;
+  align-self: center;
+}
+
+.ctf-image{
+  /* aspect-ratio: auto; */
+  width:25%;
+} 
 
 /* Right card */
 .menu-section {
@@ -124,8 +138,8 @@ html, body {
   border-radius: 12px;
 
   background: #fff;
-  border: 1px solid #dadce0;
-  color: #3c4043;
+  border: 1px solid #6e6f72;
+  color: #3f3e3e;
 
   font-family: 'Space Mono', monospace;
   font-size: 18px;
