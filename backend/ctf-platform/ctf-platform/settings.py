@@ -1,12 +1,11 @@
 import os
 from pathlib import Path
 import dj_database_url
+from dotenv import load_dotenv
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# --------------------
-# Core
-# --------------------
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-only-insecure-key")
 DEBUG = os.environ.get("DEBUG", "True").lower() == "true"
 
@@ -16,13 +15,10 @@ ALLOWED_HOSTS = [
     if h.strip()
 ]
 
-# Only meaningful behind Railway/Reverse proxy
 if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    USE_X_FORWARDED_HOST = True
 
-# --------------------
-# Apps
-# --------------------
 SITE_ID = int(os.environ.get("SITE_ID", "1"))
 
 INSTALLED_APPS = [
@@ -81,9 +77,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "ctf-platform.wsgi.application"
 
-# --------------------
-# Database
-# --------------------
+
 USE_SQLITE = os.environ.get("USE_SQLITE", "False").lower() == "true"
 
 if USE_SQLITE or (DEBUG and not os.environ.get("DATABASE_URL")):
@@ -103,15 +97,13 @@ else:
         )
     }
 
-# --------------------
-# Auth / allauth
-# --------------------
+
 AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
 )
 
-# New allauth settings (no deprecation warnings)
+
 ACCOUNT_LOGIN_METHODS = {"email"}
 ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", "password2*"]
 ACCOUNT_EMAIL_VERIFICATION = "optional"
@@ -127,9 +119,6 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-# --------------------
-# Frontend / redirects
-# --------------------
 FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:3000").rstrip("/")
 LOGIN_REDIRECT_URL = f"{FRONTEND_URL}/"
 LOGOUT_REDIRECT_URL = f"{FRONTEND_URL}/"
@@ -137,49 +126,31 @@ ACCOUNT_LOGOUT_REDIRECT_URL = f"{FRONTEND_URL}/"
 
 ACCOUNT_DEFAULT_HTTP_PROTOCOL = "http" if DEBUG else "https"
 
-# --------------------
-# CORS / CSRF
-# --------------------
-DEFAULT_CORS = "http://localhost:3000"
-DEFAULT_CSRF = "http://localhost:3000"
+DEFAULT_ORIGIN = os.environ.get("DEFAULT_ORIGIN", "http://localhost:3000").rstrip("/")
 
-CORS_ALLOWED_ORIGINS = [
-    o.strip()
-    for o in os.environ.get("CORS_ALLOWED_ORIGINS", DEFAULT_CORS).split(",")
-    if o.strip()
-]
-CSRF_TRUSTED_ORIGINS = [
-    o.strip()
-    for o in os.environ.get("CSRF_TRUSTED_ORIGINS", DEFAULT_CSRF).split(",")
-    if o.strip()
-]
+CORS_ALLOWED_ORIGINS = [o.strip().rstrip("/") for o in os.environ.get("CORS_ALLOWED_ORIGINS", DEFAULT_ORIGIN).split(",") if o.strip()]
+CSRF_TRUSTED_ORIGINS = [o.strip().rstrip("/") for o in os.environ.get("CSRF_TRUSTED_ORIGINS", DEFAULT_ORIGIN).split(",") if o.strip()]
 
 CORS_ALLOW_CREDENTIALS = True
 
-# --------------------
-# Cookies (local vs prod)
-# --------------------
+
 SESSION_COOKIE_HTTPONLY = True
 CSRF_COOKIE_HTTPONLY = False
 
 if DEBUG:
-    # local dev over http
     SESSION_COOKIE_SECURE = False
     CSRF_COOKIE_SECURE = False
     SESSION_COOKIE_SAMESITE = "Lax"
     CSRF_COOKIE_SAMESITE = "Lax"
 else:
-    # prod cross-origin (Vercel -> Railway)
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
-    SESSION_COOKIE_SAMESITE = "None"
-    CSRF_COOKIE_SAMESITE = "None"
+    SESSION_COOKIE_SAMESITE = "Lax"   
+    CSRF_COOKIE_SAMESITE = "Lax"    
 
 SESSION_COOKIE_DOMAIN = None
 
-# --------------------
-# Static / Media
-# --------------------
+
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
@@ -189,9 +160,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# --------------------
-# REST
-# --------------------
+
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
         "rest_framework.authentication.SessionAuthentication",
@@ -201,11 +170,12 @@ REST_FRAMEWORK = {
     ],
 }
 
-# --------------------
-# Prod-only security
-# --------------------
+
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SECURE_HSTS_SECONDS = 31536000
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
+
+
+ 

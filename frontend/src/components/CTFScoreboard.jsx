@@ -30,7 +30,7 @@ const CTFScoreboard = ({ onBack, user }) => {
   return (
     <div className="ctf-scoreboard">
       <header className="scoreboard-header">
-        <div className="logo">
+        <div className="sb-logo">
           <h1>CTF Platform</h1>
         </div>
         <nav>

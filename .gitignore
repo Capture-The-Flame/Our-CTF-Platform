@@ -1,0 +1,27 @@
+# env
+.env
+.env.*
+*.env
+
+# mac
+.DS_Store
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+db.sqlite3
+*.sqlite3
+
+# django generated
+staticfiles/
+media/
+
+# node
+node_modules/
+build/
+dist/
+
+# vercel
+.vercel/

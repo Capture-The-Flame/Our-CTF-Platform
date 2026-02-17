@@ -12,6 +12,14 @@ venv/
 
 # Static build output
 staticfiles/
+media/
 
 # Env files
 .env
+.env.*
+
+# macOS
+.DS_Store
+
+# Logs
+*.log

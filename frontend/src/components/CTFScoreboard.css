@@ -1,87 +1,131 @@
 .ctf-scoreboard {
   min-height: 100vh;
-  background: #ffffff;
-  font-family: 'Courier New', monospace;
+  font-family: 'Space Mono', monospace;
+  background: #fdf5f5;
 }
 
 /* header */
-.logo h1 {
+.scoreboard-header {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid #ff69b4;
+  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.15);
+}
+
+.sb-logo h1 {
+  color: #d946a6;
+  margin: 0;
   font-size: 28px;
-  color: #000;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .nav-button {
-  background: #000;
-  color: #fff;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
+  font-family: 'Space Mono', monospace;
+  background: transparent;
+  border: 2px solid #d946a6;
+  color: #d946a6;
+  padding: 10px 24px;
+  border-radius: 10px;
   cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
-/* titles */
+.nav-button:hover {
+  background: #d946a6;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(217, 70, 166, 0.3);
+}
+
+/* layout */
+.scoreboard-content {
+  padding: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.scoreboard-title-section {
+  margin-bottom: 24px;
+}
+
 .page-title {
   font-size: 48px;
-  color: #000;
+  color: #d946a6;
+  margin: 0 0 8px 0;
 }
 
 .subtitle {
-  font-size: 20px;
-  color: #444;
+  font-size: 18px;
+  color: #666;
+  margin: 0;
 }
 
-/* table container */
+/* empty state */
+.no-scores {
+  background: white;
+  border: 3px solid #ff69b4;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 4px 8px rgba(255, 105, 180, 0.1);
+}
+
+/* table */
 .scoreboard-table-container {
-  background: #fff;
-  border: 2px solid #000;
+  background: white;
+  border: 3px solid #ff69b4;
   border-radius: 15px;
-  padding: 20px;
+  padding: 18px;
+  box-shadow: 0 4px 8px rgba(255, 105, 180, 0.1);
+  overflow-x: auto;
 }
 
-/* header */
-.scoreboard-table thead {
-  background: #000;
-  color: #fff;
+.scoreboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
 }
 
-/* rows */
-.scoreboard-table tbody tr {
-  border-bottom: 1px solid #ddd;
+.scoreboard-table thead th {
+  text-align: left;
+  padding: 14px 12px;
+  border-bottom: 2px solid #ff69b4;
+  color: #a8006f;
 }
 
-.scoreboard-table tbody tr.top-three {
-  background: rgba(0,0,0,0.04);
+.scoreboard-table tbody td {
+  padding: 14px 12px;
+  border-bottom: 1px solid rgba(255, 105, 180, 0.25);
 }
 
-.scoreboard-table tbody tr.current-user {
-  border: 2px solid #000;
-  background: rgba(0,0,0,0.06);
+.scoreboard-row.top-three {
+  background: rgba(255, 105, 180, 0.08);
 }
 
-.rank-number,
-.username-cell,
-.challenges-cell {
-  color: #000;
+.scoreboard-row.current-user {
+  outline: 2px solid #d946a6;
+  outline-offset: -2px;
+  background: rgba(217, 70, 166, 0.08);
 }
 
-.points-value {
-  background: #000;
-  color: #fff;
-  padding: 6px 14px;
-  border-radius: 8px;
-  font-weight: bold;
+.rank-cell {
+  font-weight: 700;
+  color: #a8006f;
+  width: 90px;
 }
 
-/* stats */
-.your-stats {
-  border: 2px solid #000;
-  border-radius: 15px;
-  padding: 30px;
+.points-cell {
+  font-weight: 700;
+  color: #d946a6;
 }
 
-.stat-card {
-  background: #000;
-  color: #fff;
-  padding: 30px;
-  border-radius: 12px;
+.you-badge {
+  margin-left: 10px;
+  font-weight: 700;
+  color: #a8006f;
 }
