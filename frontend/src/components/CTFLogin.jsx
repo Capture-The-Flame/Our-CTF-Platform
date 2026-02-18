@@ -3,12 +3,13 @@ import './CTFLogin.css';
 
 import CTF_Logo from "../assets/CTF_Logo.png";
 
-const API_BASE = process.env.REACT_APP_API_BASE;
+const API_BASE = process.env.REACT_APP_API_BASE || "";
 
 const CTFLogin = () => {
-  const handleGoogleLogin = () => {
-    window.location.href = `${API_BASE}/accounts/google/login/`;
-  };
+
+const handleGoogleLogin = () => {
+  window.location.href = `${API_BASE}/accounts/google/login/`;
+};
 
   const LoginLogo = () => {
     return (
