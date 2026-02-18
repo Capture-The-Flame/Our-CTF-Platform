@@ -6,7 +6,7 @@ import CTFScoreboard from './components/CTFScoreboard';
 
 const API_BASE = process.env.REACT_APP_API_BASE;
 
-axios.defaults.baseURL = process.env.REACT_APP_API_BASE || "http://localhost:8000";
+axios.defaults.baseURL = "";
 axios.defaults.withCredentials = true;
 
 function App() {
