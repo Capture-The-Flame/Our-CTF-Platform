@@ -1,8 +1,3 @@
 #!/bin/bash
 python manage.py migrate --noinput
-gunicorn ctf-platform.wsgi --log-file -
-```
-
-Then update your `Procfile`:
-```
-web: bash start.sh
+gunicorn ctf-platform.wsgi --bind 0.0.0.0:$PORT --log-file -
