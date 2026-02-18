@@ -27,6 +27,7 @@ function App() {
       }
     } catch (error) {
       console.error('Auth check failed:', error);
+      console.log("BUILD: 2026-02-17-23:52")
     } finally {
       setLoading(false);
     }
