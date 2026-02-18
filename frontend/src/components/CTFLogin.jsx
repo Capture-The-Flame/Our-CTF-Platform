@@ -1,41 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './CTFLogin.css';
-
 import CTF_Logo from "../assets/CTF_Logo.png";
 
-const API_BASE = process.env.REACT_APP_API_BASE || "";
+const CTFLogin = ({ onLoginSuccess }) => {
+  const [username, setUsername] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-const CTFLogin = () => {
-
-const handleGoogleLogin = () => {
-  window.location.href = `${API_BASE}/accounts/google/login/`;
-};
-
-  const LoginLogo = () => {
-    return (
-      <div className="logo-wrapper">
-        <img src={CTF_Logo} alt="CTF Logo" className="ctf-image" />
-      </div>
-    );
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (!username.trim()) {
+      setError('Please enter a username');
+      return;
+    }
+    setLoading(true);
+    setError('');
+    try {
+      localStorage.setItem('ctf_username', username.trim());
+      onLoginSuccess({ authenticated: true, username: username.trim() });
+    } catch (err) {
+      console.error('Login error:', err);
+      setError('Failed to log in');
+    } finally {
+      setLoading(false);
+    }
   };
 
+  const LoginLogo = () => (
+    <div className="logo-wrapper">
+      <img src={CTF_Logo} alt="CTF Logo" className="ctf-image" />
+    </div>
+  );
 
   return (
     <div className="ctf-login">
       <div className="ctf-container">
         <LoginLogo />
-
         <div className="menu-section">
           <h1 className="title">Ignite the Flame</h1>
-
-          <button className="google-btn" onClick={handleGoogleLogin}>
-            <img
-              className="google-icon"
-              src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
-              alt=""
+          <form onSubmit={handleLogin} className="menu-options">
+            <input
+              type="text"
+              className="username-input"
+              placeholder="Enter your username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              disabled={loading}
+              autoFocus
             />
-            <span className="google-text">Sign in with Google</span>
-          </button>
+            {error && <div className="error-message">{error}</div>}
+            <button type="submit" className="menu-item" disabled={loading}>
+              {loading ? 'Logging in...' : 'Enter CTF'}
+            </button>
+          </form>
         </div>
       </div>
     </div>

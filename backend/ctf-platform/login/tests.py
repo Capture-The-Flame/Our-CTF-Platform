@@ -123,7 +123,6 @@ class ChallengeTests(TestCase):
     def test_dynamic_scoring_decreases_points(self):
         """Test that points decrease as more people solve the challenge"""
 
-
         user2 = User.objects.create_user(username='user2', email='user2@test.com', password='pass')
         user3 = User.objects.create_user(username='user3', email='user3@test.com', password='pass')
         

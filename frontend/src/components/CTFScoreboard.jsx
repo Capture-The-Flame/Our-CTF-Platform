@@ -15,10 +15,8 @@ const CTFScoreboard = ({ onBack, user }) => {
 
   const loadScoreboard = async () => {
     try {
-      const response = await axios.get(`${API_BASE}/api/scoreboard/`, {
-        withCredentials: true
-      });
-      setScoreboard(response.data);
+    const response = await axios.get(`${API_BASE}/api/scoreboard/`);
+    setScoreboard(response.data);
     } catch (error) {
       console.error('Failed to load scoreboard:', error);
       setError('Failed to load scoreboard.');
