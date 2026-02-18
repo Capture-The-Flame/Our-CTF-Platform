@@ -23,3 +23,5 @@ media/
 
 # Logs
 *.log
+
+.python-version
