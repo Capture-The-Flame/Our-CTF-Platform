@@ -4,8 +4,6 @@ import CTFLogin from './components/CTFLogin';
 import CTFDashboard from './components/CTFDashboard';
 import CTFScoreboard from './components/CTFScoreboard';
 
-const API_BASE = process.env.REACT_APP_API_BASE;
-
 axios.defaults.baseURL = "";
 axios.defaults.withCredentials = true;
 
