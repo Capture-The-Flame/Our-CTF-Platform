@@ -500,3 +500,20 @@ body {
   box-shadow: none;
   transform: none;
 }
+
+
+.visit-site-button {
+  background: #2f80ed;      
+  border-color: #2f80ed;
+  color: #ffffff;
+}
+
+.visit-site-button:hover {
+  background: #256fe0;
+  border-color: #256fe0;
+  transform: translateY(-2px);
+}
+
+.visit-site-button:active {
+  transform: translateY(0);
+}

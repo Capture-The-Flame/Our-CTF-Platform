@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import './ChallengeModal.css';
 
+
 const ChallengeModal = ({ challenge, onClose, onSubmit }) => {
+  const artifactUrl = challenge?.artifact_url || '';
+  const isRenderLink = artifactUrl.toLowerCase().includes('render.com');
+
   const [flag, setFlag] = useState('');
   const [showHints, setShowHints] = useState({
     hint1: false,
@@ -41,14 +45,14 @@ const ChallengeModal = ({ challenge, onClose, onSubmit }) => {
           {/* Download Button */}
           {challenge.artifact_url && (
             <div className="download-section">
-              <a 
-                href={challenge.artifact_url} 
-                download 
-                className="download-button"
+              <a
+                href={challenge.artifact_url}
+                className={`download-button ${isRenderLink ? 'visit-site-button' : ''}`}
                 target="_blank"
                 rel="noopener noreferrer"
+                {...(!isRenderLink ? { download: true } : {})}
               >
-                Download Challenge File
+                {isRenderLink ? 'Visit Site' : 'Download Challenge File'}
               </a>
             </div>
           )}

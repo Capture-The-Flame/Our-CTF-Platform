@@ -4,7 +4,7 @@ import ChallengeModal from './ChallengeModal';
 import Notification from './Notification';
 import './CTFDashboard.css';
 
-const API_BASE = process.env.REACT_APP_API_BASE;
+const API_BASE = process.env.REACT_APP_API_BASE_URL;
 
 const POLL_MS = 7000;
 
@@ -116,7 +116,7 @@ const CTFDashboard = ({ user, onLogout, onNavigate }) => {
     <div className="ctf-dashboard">
       <header className="dashboard-header">
         <div className="logo">
-          <h1>CTF Platform</h1>
+          <h1>Ignite the Flame</h1>
         </div>
 
         <nav className="nav-links">
