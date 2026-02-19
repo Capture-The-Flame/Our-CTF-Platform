@@ -29,7 +29,7 @@ const CTFScoreboard = ({ onBack, user }) => {
     <div className="ctf-scoreboard">
       <header className="scoreboard-header">
         <div className="sb-logo">
-          <h1>CTF Platform</h1>
+          <h1>Ignite the Flame</h1>
         </div>
         <nav>
           <button onClick={onBack} className="nav-button">

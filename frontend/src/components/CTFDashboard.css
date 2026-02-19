@@ -163,9 +163,9 @@ body, html {
 }
 
 .menu-item:hover {
-  background: #ffb3d9;
+  background: #ff6a00;
   transform: translateX(10px);
-  color: #cc5200;
+  color: #333231;
 }
 
 .menu-item:hover::before {
