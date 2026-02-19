@@ -14,7 +14,7 @@ const getUsername = () => {
 
 const CTFDashboard = ({ user, onLogout, onNavigate }) => {
   const [challenges, setChallenges] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedChallenge, setSelectedChallenge] = useState(null);
   const [notification, setNotification] = useState(null);

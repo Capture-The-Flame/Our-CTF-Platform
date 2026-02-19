@@ -6,7 +6,7 @@ const API_BASE = process.env.REACT_APP_API_BASE;
 
 const CTFScoreboard = ({ onBack, user }) => {
   const [scoreboard, setScoreboard] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
