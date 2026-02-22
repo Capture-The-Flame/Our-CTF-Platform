@@ -26,7 +26,7 @@ const handleGoogleLogin = () => {
         <LoginLogo />
 
         <div className="menu-section">
-          <h1 className="title">Ignite the Flame</h1>
+          <h1 className="title">Into the Flame</h1>
 
           <button className="google-btn" onClick={handleGoogleLogin}>
             <img
