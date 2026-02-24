@@ -116,7 +116,7 @@ const CTFDashboard = ({ user, onLogout, onNavigate }) => {
     <div className="ctf-dashboard">
       <header className="dashboard-header">
         <div className="logo">
-          <h1>Ignite the Flame</h1>
+          <h1>Into the Flame</h1>
         </div>
 
         <nav className="nav-links">

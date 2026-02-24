@@ -1,21 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Space+Mono:wght@400;700&display=swap');
 
+:root {
+  --bg: #1e1e1e;
+  --panel: #2a2a2a;
+  --text: #E5EBEA;
+  --accent: #C20114;
+  --muted: #726E75;
+  --panel-2: #1f1f1f;
+}
+
 body, html {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   overflow-x: hidden;
-  background: #1e1e1e;  
-  color: #f5f5f5;       
+  background: var(--bg);
+  color: var(--text);
 }
 
 .ctf-login {
   font-family: 'Space Mono', monospace;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background: #1e1e1e;
+  background: var(--bg);
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -42,7 +48,7 @@ body, html {
   font-family: 'Courier Prime', monospace;
   font-size: 12px;
   line-height: 1.2;
-  color: #ff6a00;
+  color: var(--text);
   text-align: center;
   animation: pulse 2s ease-in-out infinite;
   white-space: pre;
@@ -54,88 +60,63 @@ body, html {
 }
 
 @keyframes pulse {
-  0%, 100% { 
-    opacity: 0.8; 
-    transform: scale(1); 
-  }
-  50% { 
-    opacity: 1; 
-    transform: scale(1.02); 
-  }
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50%      { opacity: 1;    transform: scale(1.02); }
 }
 
 @keyframes flicker {
-  0%, 100% { 
-    opacity: 1; 
-  }
-  50% { 
-    opacity: 0.7; 
-  }
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.75; }
 }
 
 .menu-section {
   width: 100%;
-  background: #2a2a2a; 
+  background: var(--panel);
   border-radius: 20px;
   padding: 50px 40px;
-  border: 3px solid #ff8c00;   
-  box-shadow: none;            
-  backdrop-filter: none;   
+  border: 3px solid var(--accent);
+  box-shadow: none;
+  backdrop-filter: none;
 }
 
-
 @keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .title {
   font-size: 32px;
   font-weight: 700;
-  color: #ff6a00;
+  color: var(--text);
   margin-bottom: 10px;
   letter-spacing: 2px;
-  border-bottom: 3px dashed #ff8c00;
+  border-bottom: 3px dashed var(--accent);
   padding-bottom: 20px;
   text-align: center;
   animation: fadeIn 0.8s ease-out 0.2s both;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.menu-options {
-  margin-top: 40px;
-}
+.menu-options { margin-top: 40px; }
 
 .menu-item {
   font-family: 'Space Mono', monospace;
   font-size: 24px;
-  color: #ff6a00;
+  color: var(--text);
   margin: 20px 0;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
   padding: 15px 20px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   background: transparent;
-  border: none;
+  border: 2px solid transparent;
   position: relative;
   width: 100%;
   text-align: left;
@@ -143,65 +124,52 @@ body, html {
   animation: fadeIn 0.8s ease-out both;
 }
 
-.menu-item:nth-child(1) {
-  animation-delay: 0.3s;
-}
-
-.menu-item:nth-child(2) {
-  animation-delay: 0.4s;
-}
-
-.menu-item:nth-child(3) {
-  animation-delay: 0.5s;
-}
+.menu-item:nth-child(1) { animation-delay: 0.3s; }
+.menu-item:nth-child(2) { animation-delay: 0.4s; }
+.menu-item:nth-child(3) { animation-delay: 0.5s; }
 
 .menu-item::before {
   content: '>';
   margin-right: 15px;
   font-weight: 700;
-  transition: margin-right 0.3s ease;
+  transition: margin-right 0.25s ease;
+  color: var(--accent);
 }
 
 .menu-item:hover {
-  background: #ff6a00;
+  background: var(--text);
+  color: var(--bg);
   transform: translateX(10px);
-  color: #333231;
+  border-color: var(--accent);
 }
 
-.menu-item:hover::before {
-  margin-right: 25px;
-}
-
-.menu-item:active {
-  transform: translateX(10px) scale(0.98);
-}
+.menu-item:hover::before { margin-right: 25px; }
+.menu-item:active { transform: translateX(10px) scale(0.98); }
 
 .menu-item:focus {
-  outline: 3px solid #ff8c00;
+  outline: 3px solid var(--accent);
   outline-offset: 2px;
 }
 
-
 .ctf-dashboard {
   font-family: 'Space Mono', monospace;
-  background: #1e1e1e;  
+  background: var(--bg);
   min-height: 100vh;
-  color: #f5f5f5;
+  color: var(--text);
 }
 
 .dashboard-header {
-  background: #2a2a2a;           
+  background: var(--panel);
   padding: 20px 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 3px solid #ff8c00;
-  box-shadow: none;                
+  border-bottom: 3px solid var(--accent);
+  box-shadow: none;
 }
 
-
 .logo h1 {
-  color: #ff6a00;
+  color: var(--text);
   margin: 0;
   font-size: 28px;
   font-weight: 700;
@@ -216,26 +184,24 @@ body, html {
 .nav-link-button {
   font-family: 'Space Mono', monospace;
   background: transparent;
-  border: 2px solid #ff6a00;
-  color: #ff6a00;
+  border: 2px solid var(--text);
+  color: var(--text);
   padding: 10px 24px;
   border-radius: 10px;
   cursor: pointer;
   font-size: 16px;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .nav-link-button:hover {
-  background: #ff6a00;
-  color: white;
+  background: var(--text);
+  color: var(--bg);
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(217, 70, 166, 0.3);
+  box-shadow: none;
 }
 
-.nav-link-button:active {
-  transform: translateY(0);
-}
+.nav-link-button:active { transform: translateY(0); }
 
 .dashboard-content {
   padding: 40px;
@@ -245,14 +211,12 @@ body, html {
 
 .user-info {
   font-size: 20px;
-  color: #ff6a00;
+  color: var(--text);
   margin-bottom: 30px;
   font-weight: 600;
 }
 
-.user-info p {
-  margin: 0;
-}
+.user-info p { margin: 0; }
 
 .challenges-grid {
   display: grid;
@@ -262,29 +226,28 @@ body, html {
 }
 
 .challenge-card {
-  background: #2a2a2a;      
-  border: 3px solid #ff8c00;
+  background: var(--panel);
+  border: 3px solid var(--accent);
   border-radius: 15px;
   padding: 30px;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: none;              
+  box-shadow: none;
 }
 
 .challenge-card:hover {
-  transform: none;               
+  border-color: var(--text);
+  transform: none;
   box-shadow: none;
-  border-color: #ff6a00;
 }
 
 .challenge-card.completed {
-  background: #242424;          
-  border-color: #ff6a00;
+  background: var(--panel-2);
+  border-color: var(--text);
 }
 
-
 .challenge-title {
-  color: #ff6a00;
+  color: var(--text);
   font-size: 22px;
   font-weight: 700;
   margin: 0 0 15px 0;
@@ -292,8 +255,8 @@ body, html {
 }
 
 .challenge-points {
-  color: #ff8c00;
-  font-weight: 700;
+  color: var(--accent);
+  font-weight: 800;
   font-size: 28px;
   margin: 10px 0;
 }
@@ -301,11 +264,11 @@ body, html {
 .challenge-points::after {
   content: ' pts';
   font-size: 16px;
-  color: #ff6a00;
+  color: var(--muted);
 }
 
 .challenge-category {
-  color: #bdbdbd;
+  color: var(--muted);
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -314,7 +277,8 @@ body, html {
 }
 
 .challenge-description {
-   color: #e0e0e0;
+  color: var(--text);
+  opacity: 0.92;
   font-size: 15px;
   margin-top: 15px;
   line-height: 1.6;
@@ -326,28 +290,20 @@ body, html {
   margin-top: 20px;
 }
 
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-}
-
 .no-challenges {
   text-align: center;
   padding: 80px 20px;
 }
 
 .no-challenges h2 {
-  color: #ff6a00;
+  color: var(--text);
   margin: 30px 0 15px;
   font-size: 28px;
 }
 
 .no-challenges p {
-  color: #666;
+  color: var(--text);
+  opacity: 0.85;
   font-size: 16px;
   margin-bottom: 30px;
 }
@@ -356,164 +312,78 @@ body, html {
   display: inline-block;
   margin-top: 20px;
   padding: 15px 32px;
-  background: #ff6a00;
-  color: white;
+  background: var(--accent);
+  color: var(--text);
   text-decoration: none;
   border-radius: 10px;
-  font-weight: 600;
-  transition: all 0.3s ease;
+  font-weight: 700;
+  transition: all 0.2s ease;
   font-size: 16px;
+  border: 2px solid var(--accent);
 }
 
 .admin-link:hover {
-  background: #cc5200;
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--bg);
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(217, 70, 166, 0.3);
+  box-shadow: none;
 }
 
 .error-message {
-  background: #2a2a2a;
-  border: 3px solid #ff8c00;
+  background: var(--panel);
+  border: 3px solid var(--accent);
   border-radius: 12px;
   padding: 25px;
   margin-bottom: 30px;
-  color: #ff6a00;
-}
-
-.error-message p {
-  margin: 10px 0;
+  color: var(--text);
 }
 
 .error-message a {
-  color: #ff6a00;
-  font-weight: 700;
+  color: var(--accent);
+  font-weight: 800;
   text-decoration: underline;
 }
 
-.error-message a:hover {
-  color: #cc5200;
-}
+.error-message a:hover { color: var(--text); }
 
 .binary-heart-small {
   font-family: 'Courier Prime', monospace;
   font-size: 10px;
   line-height: 1.1;
-  color: #ff6a00;
+  color: var(--text);
   text-align: center;
   margin: 30px 0;
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
-/* Responsive design */
 @media (max-width: 768px) {
-  .binary-heart {
-    font-size: 10px;
-  }
-
-  .menu-section {
-    padding: 40px 30px;
-  }
-
-  .title {
-    font-size: 24px;
-  }
-
-  .menu-item {
-    font-size: 20px;
-    padding: 12px 15px;
-  }
-
-  .dashboard-header {
-    padding: 15px 20px;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  .logo h1 {
-    font-size: 22px;
-  }
-
-  .dashboard-content {
-    padding: 20px;
-  }
-
-  .challenges-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .nav-links {
-    width: 100%;
-    justify-content: center;
-  }
+  .binary-heart { font-size: 10px; }
+  .menu-section { padding: 40px 30px; }
+  .title { font-size: 24px; }
+  .menu-item { font-size: 20px; padding: 12px 15px; }
+  .dashboard-header { padding: 15px 20px; flex-direction: column; gap: 15px; }
+  .logo h1 { font-size: 22px; }
+  .dashboard-content { padding: 20px; }
+  .challenges-grid { grid-template-columns: 1fr; gap: 20px; }
+  .nav-links { width: 100%; justify-content: center; }
 }
 
 @media (max-width: 480px) {
-  .ctf-login {
-    padding: 20px;
-  }
-
-  .menu-section {
-    padding: 30px 20px;
-  }
-
-  .title {
-    font-size: 20px;
-    letter-spacing: 1px;
-  }
-
-  .menu-item {
-    font-size: 18px;
-    padding: 10px 12px;
-    margin: 18px 0;
-  }
-
-  .challenge-card {
-    padding: 20px;
-  }
-
-  .challenge-title {
-    font-size: 18px;
-  }
-
-  .nav-link-button {
-    padding: 8px 16px;
-    font-size: 14px;
-  }
+  .ctf-login { padding: 20px; }
+  .menu-section { padding: 30px 20px; }
+  .title { font-size: 20px; letter-spacing: 1px; }
+  .menu-item { font-size: 18px; padding: 10px 12px; margin: 18px 0; }
+  .challenge-card { padding: 20px; }
+  .challenge-title { font-size: 18px; }
+  .nav-link-button { padding: 8px 16px; font-size: 14px; }
 }
 
 *,
 *::before,
-*::after {
-  box-sizing: border-box;
-}
+*::after { box-shadow: none; box-sizing: border-box; }
 
-body {
-  margin: 0;
-  background: #1e1e1e;  
-  color: #f5f5f5;
-}
-
+body { margin: 0; background: var(--bg); color: var(--text); }
 
 .nav-link-button:hover,
-.admin-link:hover {
-  box-shadow: none;
-  transform: none;
-}
-
-
-.visit-site-button {
-  background: #2f80ed;      
-  border-color: #2f80ed;
-  color: #ffffff;
-}
-
-.visit-site-button:hover {
-  background: #256fe0;
-  border-color: #256fe0;
-  transform: translateY(-2px);
-}
-
-.visit-site-button:active {
-  transform: translateY(0);
-}
+.admin-link:hover { box-shadow: none; }
