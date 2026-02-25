@@ -1,3 +1,12 @@
+/* Uses your theme vars:
+   --bg: #1e1e1e;
+   --panel: #2a2a2a;
+   --text: #E5EBEA;
+   --accent: #C20114;
+   --muted: #726E75;
+   --panel-2: #1f1f1f;
+*/
+
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -208,7 +217,7 @@
   box-shadow: none;
 }
 
-
+/* Download section (match theme) */
 .download-section {
   margin: 18px 0;
   text-align: center;
@@ -235,7 +244,7 @@
 
 .download-button:active { transform: translateY(0); }
 
-
+/* Scrollbar */
 .modal-content::-webkit-scrollbar { width: 8px; }
 .modal-content::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.03); }
 .modal-content::-webkit-scrollbar-thumb {
