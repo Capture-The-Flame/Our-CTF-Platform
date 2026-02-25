@@ -45,7 +45,7 @@ class UserChallengeAdmin(admin.ModelAdmin):
     list_display = ('get_username', 'challenge', 'completed_at', 'awarded_points')
     list_filter = ('completed_at',)
     search_fields = ('user__username', 'user__email', 'challenge__title')
-    readonly_fields = ('completed_at', 'awarded_points')
+    readonly_fields = ('completed_at')
     actions = [delete_user_challenges_and_recompute]
 
     def get_username(self, obj):
@@ -53,3 +53,8 @@ class UserChallengeAdmin(admin.ModelAdmin):
 
     get_username.short_description = 'Username'
     get_username.admin_order_field = 'user__username'
+
+
+
+    
+    
