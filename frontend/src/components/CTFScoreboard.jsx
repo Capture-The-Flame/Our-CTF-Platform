@@ -50,8 +50,7 @@ const CTFScoreboard = ({ onBack, user }) => {
 
         {scoreboard.length === 0 && !error ? (
           <div className="no-scores">
-            <h3>No scores yet!</h3>
-            <p>Be the first to complete a challenge!</p>
+            <h3>Loading...</h3>
           </div>
         ) : (
           <div className="scoreboard-table-container">
