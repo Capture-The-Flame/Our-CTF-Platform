@@ -33,4 +33,4 @@ class UserChallengeAdmin(admin.ModelAdmin):
     list_display = ('username', 'challenge', 'completed_at', 'awarded_points')
     list_filter = ('completed_at',)
     search_fields = ('username', 'challenge__title')
-    readonly_fields = ('completed_at', 'awarded_points')
+    readonly_fields = ('completed_at')
