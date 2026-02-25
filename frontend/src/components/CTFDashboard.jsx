@@ -157,7 +157,7 @@ const CTFDashboard = ({ user, onLogout, onNavigate }) => {
 
         {challenges.length === 0 && !error ? (
           <div className="no-challenges">
-            <h2>No Challenges Yet!</h2>
+            <h2>Loading...</h2>
           </div>
         ) : (
           <div className="challenges-grid">
