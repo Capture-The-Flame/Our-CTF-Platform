@@ -208,7 +208,7 @@
   box-shadow: none;
 }
 
-
+/* Download section (match theme) */
 .download-section {
   margin: 18px 0;
   text-align: center;
@@ -235,7 +235,7 @@
 
 .download-button:active { transform: translateY(0); }
 
-
+/* Scrollbar */
 .modal-content::-webkit-scrollbar { width: 8px; }
 .modal-content::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.03); }
 .modal-content::-webkit-scrollbar-thumb {
