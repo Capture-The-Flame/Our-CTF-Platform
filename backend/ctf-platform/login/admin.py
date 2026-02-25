@@ -4,20 +4,12 @@ from .models import Challenge, UserChallenge
 
 def recompute_challenge(challenge: Challenge):
     solves = UserChallenge.objects.filter(challenge=challenge).count()
-    challenge.solves_count = solves
-    challenge.current_points = max(
-        challenge.min_points,
-        challenge.base_points - solves * challenge.decrement
-    )
-    challenge.save(update_fields=["solves_count", "current_points"])
+    Challenge.objects.filter(pk=challenge.pk).update(solves_count=solves)
 
 
 @admin.action(description="Reset selected challenges (solves=0, current_points=base_points)")
 def reset_selected_challenges(modeladmin, request, queryset):
-    for c in queryset:
-        c.solves_count = 0
-        c.current_points = c.base_points  
-        c.save(update_fields=["solves_count", "current_points"])
+    queryset.update(solves_count=0)
 
 
 @admin.action(description="Delete selected user challenges (and recompute challenge points)")
